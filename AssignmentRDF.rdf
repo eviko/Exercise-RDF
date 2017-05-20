@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF 
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+	xmlns:event="http://www.example.com/eventful#">
+	
+	<rdfs:Class rdf:ID="artist"/>	
+	<rdfs:Class rdf:ID="venue"/>
+	<rdfs:Class rdf:ID="event">
+		<rdfs:comment>
+			class event has 3 subClasses concert,theater,exhibition
+	</rdfs:comment>
+</rdfs:Class>
+	<rdfs:Class rdf:ID="concert">
+		<rdfs:comment>
+			Concert  is the subClassOf event 
+		</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="#event"/>
+	</rdfs:Class>
+
+	<rdfs:Class rdf:ID="theater">
+		<rdfs:comment>
+			theater is the subClassOf event
+		</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="#event"/>
+	</rdfs:Class>
+	
+	<rdfs:Class rdf:ID="exhibition">
+		<rdfs:comment>
+			exhibition is the subClassOf event 
+		</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="#event"/>
+	</rdfs:Class>
+
+	<rdfs:Class rdf:ID="opera">
+		<rdfs:comment>
+			opera is the subClassOf theater and concert 
+		</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="#theater"/>
+		<rdfs:subClassOf rdf:resource="#concert"/>
+	</rdfs:Class>
+	
+	<!-- Properties of artist --> 
+	
+	<rdf:Property rdf:ID="artist_name">
+		<rdfs:comment>
+			It's a property of artist and takes literals as values
+		</rdfs:comment>
+		<rdfs:domain rdf:resource="#artist"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+	<rdf:Property rdf:ID="artist_kind">
+		<rdfs:comment>
+			It's a property of artist and takes literals as values
+		</rdfs:comment>
+		<rdfs:domain rdf:resource="#artist"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+	
+	
+	<!-- Properties of event --> 
+	
+	<rdf:Property rdf:ID="title">
+		<rdfs:comment>
+			It's a property of event and takes literals as values
+		</rdfs:comment>
+		<rdfs:domain rdf:resource="#event"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+	<rdf:Property rdf:ID="starting">
+		<rdfs:domain rdf:resource="#event"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+	<rdf:Property rdf:ID="cost">
+		<rdfs:domain rdf:resource="#event"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+	<rdf:Property rdf:ID="genre">
+		<rdfs:comment>
+			It's a property of exhibition and takes literals as values
+		</rdfs:comment>
+		<rdfs:domain rdf:resource="#exhibition"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>	
+
+	<rdf:Property rdf:ID="isPerformedBy">
+		<rdfs:domain rdf:resource="#event"/>
+		<rdfs:range rdf:resource="#artist"/>
+	</rdf:Property>
+	<rdf:Property rdf:ID="takesPlace">
+		<rdfs:domain rdf:resource="#event"/>
+		<rdfs:range rdf:resource="#venue"/>
+	</rdf:Property>
+	<!-- Properties of venue --> 
+	<rdf:Property rdf:ID="venueName">
+		<rdfs:domain rdf:resource="#venue"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+	<rdf:Property rdf:ID="address">
+		<rdfs:comment>
+			It's a property of venue 
+		</rdfs:comment>
+		<rdfs:domain rdf:resource="#venue"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+	<rdf:Property rdf:ID="communication">
+		<rdfs:comment>
+			It's a property of venue
+		</rdfs:comment>
+		<rdfs:subPropertyOf rdf:resource="#venue"/>
+		<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	</rdf:Property>
+
+	<rdf:Property rdf:ID="url">
+		<rdfs:comment>
+			It's a subproperty of communication
+		</rdfs:comment>
+		<rdfs:subPropertyOf rdf:resource="#communication"/>
+		<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+		<rdfs:range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	</rdf:Property>	
+	<rdf:Property rdf:ID="phone">
+		<rdfs:comment>
+			It's a subproperty of communication
+		</rdfs:comment>
+		<rdfs:subPropertyOf rdf:resource="#communication"/>
+		<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+		<rdfs:range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	</rdf:Property>	
+
+
+	
+<!-- Event1 -->
+	
+	<rdf:Description rdf:ID = "eventPixies">
+		<rdf:type rdf:resource = "concert"/>
+		<event:title>Pixies</event:title>
+		<event:starting>2016-07-18T20:00:00</event:starting>
+		<event:cost>70,45</event:cost>
+		<event:isPerformedBy rdf:resource= "artists_Pixies"/>
+		<event:takesPlace rdf:resource= "venue_Pixies"/>
+	</rdf:Description>
+	<rdf:Description rdf:ID = "artists_Pixies">
+		<rdf:type rdf:resource = "artist"/>
+		<event:artist_kind>singers</event:artist_kind>
+		<event:artist_name>Black Franci</event:artist_name>
+		<event:artist_name>Joey Santiago</event:artist_name>
+		<event:artist_name>Paz Lenchantin</event:artist_name>
+		<event:artist_name>David Lovering</event:artist_name>
+	</rdf:Description>
+	
+	<rdf:Description rdf:ID = "venue_Pixies">
+		<rdf:type rdf:resource = "venue"/>
+		<event:venueName>Zitadelle Spandau</event:venueName>
+		<event:address>Am Juliusturm 64 13599,Berlin</event:address>
+		<event:url>http://berlin.eventful.com/events/pixies-/E0-001-090893869-5</event:url>
+		<event:phone>+491884568499</event:phone>
+	</rdf:Description>
+	
+<!-- Event2 -->		
+		
+	<rdf:Description rdf:ID="eventCure">
+		<rdf:type rdf:resource = "concert"/>
+		<event:title>The Cure</event:title>
+		<event:starting>2016-10-18T20:00:00</event:starting>
+		<event:cost>99,79,50</event:cost>
+		<event:isPerformedBy rdf:resource= "artists_Cure"/>		
+		<event:takesPlace rdf:resource= "venue_Cure"/>		
+	</rdf:Description>
+	<rdf:Description rdf:ID = "artists_Cure">
+		<rdf:type rdf:resource = "artist"/>
+		<event:artist_kind>singers</event:artist_kind>
+		<event:artist_name>Robert Smith</event:artist_name>
+		<event:artist_name>Lol Tolhurst </event:artist_name>
+		<event:artist_name>Porl Thompson</event:artist_name>
+	</rdf:Description>	
+	<rdf:Description rdf:ID = "venue_Cure">
+		<rdf:type rdf:resource = "venue"/>
+		<event:venueName>Mercedes Benz Arena</event:venueName>
+		<event:address>Mercedes-Platz 1 , Berlin 10243 ,Germany</event:address>
+		<event:url>http://berlin.eventful.com/events/cure-berlin-/E0-001-089188325-7</event:url>
+		<event:phone>+491884568758</event:phone>
+	</rdf:Description>
+
+<!-- Event3 -->	
+
+	<rdf:Description rdf:ID="eventDeathOfSalesman">
+		<rdf:type rdf:resource = "theater"/>
+		<event:title>Death of a Salesman</event:title>
+		<event:starting>2016-03-24T21:00:00</event:starting>
+		<event:cost>25,20,15</event:cost>
+		<event:isPerformedBy rdf:resource= "artists_Salesman"/>		
+		<event:takesPlace rdf:resource= "venue_Salesman"/>		
+	</rdf:Description>
+	<rdf:Description rdf:ID = "artists_Salesman">
+		<rdf:type rdf:resource = "artist"/>
+		<event:artist_kind>actors and actresses</event:artist_kind>
+		<event:artist_name>Petros Filippidis</event:artist_name>
+		<event:artist_name>Peggy Stathakopoulou</event:artist_name>
+		<event:artist_name>Alexandros Logothetis </event:artist_name>
+		<event:artist_name>Dimitris Kitsos</event:artist_name>
+		<event:artist_name>Nektaria Yannoudaki </event:artist_name>
+	</rdf:Description>
+	<rdf:Description rdf:ID = "venue_Salesman">
+		<rdf:type rdf:resource = "venue"/>
+		<event:venueName>National Theatre of Greece</event:venueName>
+		<event:street>Agiou Konstadinou 1 10255,Athens</event:street>
+		<event:url>22-24 Agiou Konstadinou,10437 Athens,Greece</event:url>
+		<event:phone>2103425369</event:phone>
+	</rdf:Description>
+	
+	<!-- Event4 -->	
+
+	<rdf:Description rdf:ID="eventFilumena">
+		<rdf:type rdf:resource = "theater"/>
+		<event:title>Filumena</event:title>
+		<event:starting>2015-10-01T21:00:00</event:starting>
+		<event:cost>25,20,15,8</event:cost>
+		<event:isPerformedBy rdf:resource= "artists_Filumena"/>		
+		<event:takesPlace rdf:resource= "venue_Salesman"/>		
+	</rdf:Description>
+	<rdf:Description rdf:ID = "artists_Filumena">
+		<rdf:type rdf:resource = "artist"/>
+		<event:artist_kind>actors and actresses</event:artist_kind>
+		<event:artist_name>Eleni Randou</event:artist_name>
+		<event:artist_name>Alkis Kourkoulos</event:artist_name>
+		<event:artist_name>Vilma Tsakiri</event:artist_name>
+		<event:artist_name>Dina Avagianou</event:artist_name>
+		<event:artist_name>Meletis Georgiadis</event:artist_name>
+		<event:artist_name>Maria Diakopanagiotou</event:artist_name>
+		<event:artist_name>Evgenia Dimitropoulou</event:artist_name>
+	</rdf:Description>
+
+		
+	<!-- Event5 -->	
+
+	<rdf:Description rdf:ID="eventPorgyAndBessMilan">
+		<rdf:type rdf:resource = "opera"/>
+		<event:title>PorgyAndBessMilan</event:title>
+		<event:starting>2016-05-01T21:00:00</event:starting>
+		<event:cost>200,100</event:cost>
+		<event:isPerformedBy rdf:resource= "artists_PorgyAndBessMilan"/>		
+		<event:takesPlace rdf:resource= "venue_PorgyAndBessMilan"/>		
+	</rdf:Description>
+	<rdf:Description rdf:ID = "artists_PorgyAndBessMilan">
+		<rdf:type rdf:resource = "artist"/>
+		<event:artist_kind>singer and actor</event:artist_kind>
+		<event:artist_name>Porgy</event:artist_name>
+		<event:artist_name>Bess</event:artist_name>	
+	</rdf:Description>
+	<rdf:Description rdf:ID = "venue_PorgyAndBessMilan">
+		<rdf:type rdf:resource = "venue"/>
+		<event:venueName>Scala di Milano</event:venueName>
+		<event:street>Via Filodrammatici 2,20121 Milan,Italy</event:street>
+		<event:url>http://www.teatroallascala.org/en/index.html</event:url>
+		<event:phone>+ 390288791</event:phone>
+	</rdf:Description>	
+
+	<!-- Event6 -->	
+
+	<rdf:Description rdf:ID="eventΑrticulations">
+		<rdf:type rdf:resource = "exhibition"/>
+		<event:title>Αrticulations</event:title>
+		<event:genre>Design</event:genre>
+		<event:starting>2016-07-01T21:00:00</event:starting>
+		<event:cost>free</event:cost>
+		<event:isPerformedBy rdf:resource= "artists_Αrticulations"/>		
+		<event:takesPlace rdf:resource= "venue_Αrticulations"/>		
+	</rdf:Description>
+	<rdf:Description rdf:ID = "artists_Αrticulations">
+		<rdf:type rdf:resource = "artist"/>
+		<event:artist_kind>architect</event:artist_kind>
+		<event:artist_name>Christos Paplomatas</event:artist_name>	
+	</rdf:Description>
+	<rdf:Description rdf:ID = "venue_Αrticulations">
+		<rdf:type rdf:resource = "venue"/>
+		<event:venueName>Benaki Museum</event:venueName>
+		<event:street>138 Pireos street,11854 Athens,Greece</event:street>
+		<event:url>http://www.benaki.gr</event:url>
+		<event:phone>2103616698</event:phone>
+	</rdf:Description>
+	<!-- Event7 -->	
+		
+	<rdf:Description rdf:about="eventThomasHope">
+		<rdf:type rdf:resource = "exhibition"/>
+		<event:title>Thomas Hope</event:title>
+		<event:genre>Painting</event:genre>
+		<event:starting>2016-06-12T21:00:00</event:starting>
+		<event:cost>5</event:cost>
+		<event:isPerformedBy rdf:resource= "artists_ThomasHope"/>		
+		<event:takesPlace rdf:resource= "venue_Αrticulations"/>		
+	</rdf:Description>		
+	<rdf:Description rdf:ID = "artists_ThomasHope">
+		<rdf:type rdf:resource = "artist"/>
+		<event:artist_kind>painter</event:artist_kind>
+		<event:artist_name>Fani Tsigkakou</event:artist_name>	
+	</rdf:Description>		
+		
+</rdf:RDF>
